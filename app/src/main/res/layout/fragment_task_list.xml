@@ -17,7 +17,7 @@
         app:layout_constraintBottom_toBottomOf="parent"/>
     <ProgressBar
         android:id="@+id/taskListProgressBar"
-        android:visibility="invisible"
+        android:visibility="visible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"

@@ -7,12 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.approvetest.R
 import com.example.approvetest.adapters.TaskListAdapter
 import com.example.approvetest.databinding.FragmentTaskListBinding
-import com.example.approvetest.databinding.TaskListItemBinding
-import com.example.approvetest.model.Task
+
 import com.example.approvetest.ui.AppViewModel
 import com.example.approvetest.ui.TaskActivity
 import com.example.approvetest.utils.Constants
@@ -39,7 +37,6 @@ class TaskListFragment : Fragment(R.layout.fragment_task_list) {
                     hideProgressBar()
                     response.data?.let{ taskResponse ->
                         taskAdapter.differ.submitList(taskResponse)
-                        Log.d("main","${taskAdapter.differ.currentList}")
                     }
                 }
                 is Resource.Loading ->{

@@ -5,10 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
 import com.example.approvetest.R
 import com.example.approvetest.Repository
-import com.example.approvetest.adapters.TaskListAdapter
 import com.example.approvetest.databinding.TaskActivityBinding
 import com.example.approvetest.ui.fragments.TaskListFragment
 import com.example.approvetest.utils.Resource
@@ -33,6 +31,7 @@ class TaskActivity : AppCompatActivity() {
         viewModel.user.observe(this, Observer { response ->
             when (response) {
                 is Resource.Success -> {
+                    binder.mailTextView.text = response.data?.id.toString()
                     binder.balanceTextView.text = response.data?.balance.toString()
                 }
                 is Resource.Error -> {

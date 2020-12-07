@@ -1,24 +1,13 @@
 package com.example.approvetest.model
 
-import com.example.approvetest.utils.DescriptionDeserializer
+import com.google.gson.Gson
+import com.google.gson.JsonDeserializationContext
+import com.google.gson.JsonDeserializer
+import com.google.gson.JsonElement
 import com.google.gson.annotations.JsonAdapter
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
-
-//[
-//{
-//    "id": 0,
-//    "name": "Посмотреть видео",
-//    "one_time_execution": false,
-//    "user_limit_count": 2,
-//    "user_limit": 10,
-//    "reward": 0.5,
-//    "cooldown": 0,
-//    "custom_data": "string",
-//    "subtasks_total": "3",
-//    "parent_closed": true
-//}
-//]
+import java.lang.reflect.Type
 
 
 data class Task(
@@ -37,7 +26,8 @@ data class Task(
     @SerializedName("cooldown")
     var cooldown:Int? = null,
     @SerializedName("custom_data")
-    var customData:String? = null,
+    @JsonAdapter(Task.CustomData.Deserializer::class)
+    var customData:CustomData? = null,
     @SerializedName("subtasks_total")
     var subtasksTotal:Int? = null,
     @SerializedName("parent_closed")
@@ -46,6 +36,12 @@ data class Task(
     data class CustomData(
         @SerializedName("description")
         var description:String? = null
-    )
+    ) {
+        companion object Deserializer : JsonDeserializer<CustomData>{
+            override fun deserialize(json: JsonElement?, typeOfT: Type?, context: JsonDeserializationContext?): CustomData {
+                return Gson().fromJson(json?.asString,CustomData::class.java)
+            }
+        }
+    }
 }
 

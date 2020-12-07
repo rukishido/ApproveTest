@@ -7,6 +7,8 @@ import com.example.approvetest.Repository
 import com.example.approvetest.model.Task
 import com.example.approvetest.model.User
 import com.example.approvetest.utils.Resource
+import com.google.gson.Gson
+import com.google.gson.JsonDeserializer
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
@@ -29,7 +31,8 @@ class AppViewModel(
 
     fun getTasks() = viewModelScope.launch {
         val response = repository.getTasks()
-        tasks.postValue(response.body()?.let { result ->  Resource.Success(result) })
+        tasks.postValue(response.body()?.let { result ->
+            Resource.Success(result) })
     }
 
 

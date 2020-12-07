@@ -1,6 +1,5 @@
 package com.example.approvetest.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +22,6 @@ class TaskListAdapter() : RecyclerView.Adapter<TaskListAdapter.TaskItemViewHolde
         }
 
         fun bind(currentTask:Task){
-            Log.d("main","bind from adapter")
             with(binding){
                 taskIdTextView.text = currentTask.id.toString()
                 taskName.text = currentTask.name
@@ -46,12 +44,10 @@ class TaskListAdapter() : RecyclerView.Adapter<TaskListAdapter.TaskItemViewHolde
     val differ = AsyncListDiffer(this,differCallback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskItemViewHolder {
-        Log.d("main","onCreateViewHolder")
         return TaskItemViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.task_list_item,parent,false))
     }
 
     override fun getItemCount(): Int {
-        Log.d("main","getItemCount")
         return differ.currentList.size
     }
 
